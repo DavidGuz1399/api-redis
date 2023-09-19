@@ -30,4 +30,5 @@ Route::group([
     'middleware' => 'auth:api'
 ], function ($router) {
     Route::get('/leads', [CandidateController::class, 'index']);
+    Route::post('/lead', [CandidateController::class, 'store']);
 });
