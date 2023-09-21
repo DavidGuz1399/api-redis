@@ -7,6 +7,10 @@ use App\Models\Candidate;
 
 class CandidateController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.role:manager', ['only' => ['store']]);
+    }
     public function index () {
         return Candidate::all();
     }
@@ -21,6 +25,6 @@ class CandidateController extends Controller
         return $candidate;
     }
     public function getCandidateById ($id) {
-        return Candidate::findById($id);
+        return Candidate::find($id);
     }
 }

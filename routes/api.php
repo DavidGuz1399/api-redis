@@ -20,15 +20,16 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/', [AuthController::class, 'login']);
+    /*Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);*/
 });
 Route::group([
     'middleware' => 'auth:api'
 ], function ($router) {
+    Route::get('/lead/{id}', [CandidateController::class, 'getCandidateById']);
     Route::get('/leads', [CandidateController::class, 'index']);
     Route::post('/lead', [CandidateController::class, 'store']);
 });
