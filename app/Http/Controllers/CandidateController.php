@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Candidate;
+use Illuminate\Support\Facades\Cache;
 
 class CandidateController extends Controller
 {
     public function index () {
-        return Candidate::all();
+        $result = Cache::get('candidates',function(){
+            return Candidate::all();
+        });
+        return $result;
     }
     public function store (Request $request) {
         $candidate = new Candidate();
