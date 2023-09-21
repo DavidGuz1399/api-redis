@@ -9,5 +9,6 @@ class Candidate extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
 
 }

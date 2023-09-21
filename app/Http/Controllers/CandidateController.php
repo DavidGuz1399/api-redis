@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Candidate;
+use Illuminate\Support\Facades\Cache;
 
 class CandidateController extends Controller
 {
@@ -12,7 +13,10 @@ class CandidateController extends Controller
         $this->middleware('auth.role:manager', ['only' => ['store']]);
     }
     public function index () {
-        return Candidate::all();
+        $result = Cache::get('candidates',function(){
+            return Candidate::all();
+        });
+        return $result;
     }
     public function store (Request $request) {
         $candidate = new Candidate();
